@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 /**
  * Created by dnes on 14/04/16.
  */
@@ -54,11 +55,15 @@ public class ArxivAPI {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                // do something with the current element
-                System.out.println(node.getNodeName());
+                NodeList childs = node.getChildNodes();
+                for (int j = 0; j < childs.getLength(); j++) {
+                    if (childs.item(j).getNodeName().equals("id") || childs.item(j).getNodeName().equals("title") || childs.item(j).getNodeName().equals("summary")) {
+                        System.out.print(childs.item(j).getNodeName() + ":");
+                        System.out.println(childs.item(j).getTextContent());
+                    }
+                }
             }
         }
-
     }
 
 
